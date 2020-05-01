@@ -1,0 +1,18 @@
+<html xmlns:th="www.thymeleaf.org">
+	
+	<div class="bg-dark text-white p-3 mt-3" th:fragment="cart_partial" th:if="${notcartviewpage == null}">
+		<div class="cart cartActive" th:if="${cActive}">
+			<p>You have <span th:text="${csize}"></span> items in your cart.</p>
+			<p>Total <span th:text=" '$' + ${#numbers.formatDecimal(ctotal, 0, 'COMMA', 2,'POINT')}"></span> items in your cart.</p>
+			<p>
+				<a href="/cart/view" class="btn btn-success">View cart</a>
+				<a href="/cart/clear" class="btn btn-danger">Clear cart</a>
+			</p>			
+		</div>
+		<div th:unless="${cActive}" class="cart cartInactive">
+			<p>Your cart is empty.</p>
+		</div>
+	</div>
+
+
+</html>

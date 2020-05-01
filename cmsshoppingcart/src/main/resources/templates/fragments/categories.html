@@ -1,0 +1,15 @@
+<html xmlns:th="www.thymeleaf.org">
+	<div class="col-3" th:fragment="categories">
+		<h3 class="display-4">Categories</h3>
+		<ul class="list-group">
+			<li class="list-group-item">
+				<a href="/category/all" class="nav-link">All products</a>
+			</li>
+			<li class="list-group-item" th:each="cat: ${ccategories}">
+				<a class="nav-link" th:href="@{'/category/' + ${cat.slug}}" th:text="${cat.name}"></a>
+			</li>
+		</ul>
+
+		<div th:replace="/fragments/cart_partial"></div>
+	</div>
+</html>

@@ -1,0 +1,54 @@
+<html xmlns:th="www.thymeleaf.org">
+
+<head th:replace="/fragments/head">
+</head>
+<body>
+	<nav th:replace="/fragments/nav :: nav-admin"></nav>
+	<div class="container">
+		
+		<h1> Edit the Page " <i><span th:text="${pages.title}"></span></i> " </h1>
+		<a href="/admin/pages" class="btn btn-md btn-primary mb-5">Back to Pages</a>
+			
+		<div th:if="${message}" th:text="${message}" th:class="${alertClass}">
+		
+		</div>
+			
+		<form th:action="@{/admin/pages/edited}" th:object="${pages}" method="post">
+			
+			<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+				There are errors in the field.			
+			</div>
+			
+			<!-- add support for update -->
+			<input type="hidden" th:field="*{id}" th:value="${pages.id}">
+			<input type="hidden" th:field="*{sorting}" th:value="${pages.sorting}">
+			
+			<div class="form-group">
+				<label for="">Title</label>
+				<input type="text" class="form-control" th:field="*{title}" th:value="${pages.title}"> 
+				<span class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+			</div>
+			
+			<div class="form-group">
+				<label for="">Slug</label>
+				<input type="text" class="form-control" th:field="*{slug}" th:value="${pages.slug}">
+				<span class="error" th:if="${#fields.hasErrors('slug')}" th:errors="*{slug}"></span>
+			</div>
+			
+			<div class="form-group">
+				<label for="">Content</label>
+				<textarea class="form-control" th:field="*{content}" th:value="${pages.content}"></textarea>
+				<span class="error" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
+			</div>
+			
+			<button class="btn btn-danger">Save</button>			
+			
+					
+		</form>
+		
+	</div>
+</body>
+<footer th:replace="/fragments/footer"></footer>
+</html>
+
+
